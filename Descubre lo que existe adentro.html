@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un pedacito de universo 💙</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #02030b;
+    color: white;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+/* PANTALLA DE BIENVENIDA */
+
+.inicio {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: radial-gradient(circle, #173b69, #080c21 65%, #01030a);
+}
+
+.carta {
+    width: 100%;
+    max-width: 520px;
+    padding: 32px;
+    text-align: center;
+    background: rgba(5, 15, 35, .94);
+    border: 1px solid #d5b5ff;
+    border-radius: 25px;
+    box-shadow: 0 0 35px #8b66d8;
+}
+
+.carta h1 {
+    color: #d9c3ff;
+    margin-bottom: 22px;
+    text-shadow: 0 0 15px #a77aff;
+}
+
+.carta p {
+    line-height: 1.8;
+    color: #e5e9ff;
+    margin: 16px 0;
+    font-size: 15px;
+}
+
+.carta h2 {
+    color: #b8dfff;
+    margin: 20px;
+}
+
+button {
+    padding: 15px 28px;
+    border: 1px solid #d9c3ff;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #214f94, #8058b5);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #9470dc;
+}
+
+/* UNIVERSO */
+
+#universo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at center, #180d32, #080a1d 60%, #01030a);
+}
+
+.estrellas {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(white 1px, transparent 1px),
+      radial-gradient(#c9a5ff 1px, transparent 1px),
+      radial-gradient(#8ddaff 2px, transparent 2px);
+    background-size: 43px 43px, 83px 83px, 130px 130px;
+    animation: brillar 3s infinite alternate;
+}
+
+@keyframes brillar {
+    from { opacity: .35; }
+    to { opacity: 1; }
+}
+
+.titulo {
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(19px, 4vw, 29px);
+    color: #d9c5ff;
+    text-shadow: 0 0 20px #a77aff;
+    z-index: 5;
+}
+
+/* GALAXIA CENTRAL */
+
+#galaxia {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* PALABRAS FLOTANTES */
+
+.palabra {
+    position: absolute;
+    color: #e6c7ff;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 0 0 12px #c28aff;
+    animation: flotar 5s ease-in-out infinite alternate;
+    z-index: 3;
+}
+
+@keyframes flotar {
+    from { transform: translateY(0) rotate(-4deg); }
+    to { transform: translateY(-15px) rotate(4deg); }
+}
+
+.p1 { top: 17%; left: 12%; }
+.p2 { top: 25%; right: 13%; animation-delay: 1s; }
+.p3 { top: 44%; left: 5%; animation-delay: 2s; }
+.p4 { top: 51%; right: 5%; animation-delay: .5s; }
+.p5 { bottom: 17%; left: 15%; animation-delay: 1.5s; }
+.p6 { bottom: 18%; right: 13%; animation-delay: 2.5s; }
+.p7 { top: 32%; left: 43%; animation-delay: 1s; }
+
+/* IMÁGENES */
+
+.sticker {
+    position: absolute;
+    width: 90px;
+    height: 95px;
+    padding: 5px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(218,190,255,.8);
+    box-shadow: 0 0 18px rgba(169,126,255,.5);
+    animation: flotar 4s ease-in-out infinite alternate;
+    z-index: 4;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.sticker:hover {
+    transform: scale(1.15) rotate(3deg);
+}
+
+.sticker img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 30px;
+}
+
+.fallback small {
+    font-size: 10px;
+    color: #e8d9ff;
+    margin-top: 4px;
+}
+
+.sticker img:not([src=""]) {
+    display: block;
+}
+
+.s1 { top: 19%; left: 25%; }
+.s2 { top: 18%; right: 25%; animation-delay: 1s; }
+.s3 { top: 42%; left: 15%; animation-delay: 2s; }
+.s4 { top: 43%; right: 15%; animation-delay: .5s; }
+.s5 { bottom: 20%; left: 28%; animation-delay: 1.5s; }
+.s6 { bottom: 20%; right: 28%; animation-delay: 2s; }
+.s7 { top: 62%; left: 47%; animation-delay: 1s; }
+
+/* CORAZONES Y DESTELLOS */
+
+.corazon {
+    position: absolute;
+    font-size: 22px;
+    animation: subir 7s linear infinite;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(110vh) rotate(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-15vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* MENSAJE FINAL */
+
+.final {
+    position: absolute;
+    bottom: 4%;
+    width: 100%;
+    text-align: center;
+    color: #d9c5ff;
+    text-shadow: 0 0 15px #a77aff;
+    font-size: clamp(13px, 2.5vw, 18px);
+    z-index: 5;
+    padding: 0 10px;
+}
+
+@media(max-width: 500px) {
+
+    .carta {
+        padding: 23px;
+    }
+
+    .carta p {
+        font-size: 14px;
+    }
+
+    .sticker {
+        width: 66px;
+        height: 72px;
+    }
+
+    .s1 { top: 20%; left: 12%; }
+    .s2 { top: 20%; right: 12%; }
+    .s3 { top: 39%; left: 5%; }
+    .s4 { top: 39%; right: 5%; }
+    .s5 { bottom: 22%; left: 14%; }
+    .s6 { bottom: 22%; right: 14%; }
+    .s7 { top: 57%; left: 43%; }
+
+    .palabra {
+        font-size: 11px;
+    }
+
+    .p3 { left: 2%; }
+    .p4 { right: 2%; }
+}
+</style>
+@keyframes subirPalabras {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+.palabra {
+    animation: subirPalabras 4s ease-in-out infinite;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BIENVENIDA -->
+
+<div class="inicio" id="inicio">
+
+    <div class="carta">
+
+        <h1>💌 Tengo una pequeña sorpresa...</h1>
+
+        <p>
+        Quizá para ti sea solamente una página,
+        pero para mí significa mucho.
+        </p>
+
+        <p>
+        Después de intentar, equivocarme, aprender
+        y volver a intentarlo...
+        ¡POR FIN PUDE HACERLO FUNCIONAR! 🥹
+        </p>
+
+        <p>
+        Quería que fueras la primera persona en ver
+        este pequeño avance de mi carrera y de todo
+        lo que estoy aprendiendo.
+        </p>
+
+        <p>
+        Así que preparé este pequeño universo,
+        con algunas cositas bonitas que espero
+        te saquen una sonrisa.
+        </p>
+
+        <h2>Un detallito para ti 💙</h2>
+
+        <button onclick="entrar()">
+            ✨ Abrir sorpresa ✨
+        </button>
+
+    </div>
+
+</div>
+
+<!-- UNIVERSO -->
+
+<div id="universo">
+
+    <div class="estrellas"></div>
+
+    <canvas id="galaxia"></canvas>
+
+    <h1 class="titulo">
+        ✨ Un pequeño universo combinado ✨
+    </h1>
+
+    <!-- PALABRAS -->
+
+    <div class="palabra p1">TQM. 💙</div>
+    <div class="palabra p2">Sonríe siempre. ✨</div>
+    <div class="palabra p3">Eres increíble. 🦋</div>
+    <div class="palabra p4">   Eres inteligente. 💜</div>
+    <div class="palabra p5">Qué bonito coincidir. 🌷</div>
+    <div class="palabra p6">Un abrazo con mucho cariño. 🤗</div>
+    <div class="palabra p7">Quedate conmigo mucho timpo... 🥺🙏🏻 💜</div>
+
+    <!-- FOTOS -->
+    <!-- Coloca las fotografías dentro de una carpeta llamada imagenes -->
+
+    <div class="sticker s1">
+        <img src="imagenes/gato1.jpg" alt="Gatito"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">🐱<small>Gatito</small></div>
+    </div>
+
+    <div class="sticker s2">
+        <img src="imagenes/spiderman.png" alt="Spiderman"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">🕷️<small>Spidey</small></div>
+    </div>
+
+    <div class="sticker s3">
+        <img src="imagenes/freen.jpg" alt="Freen"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">💗<small>Freen</small></div>
+    </div>
+
+    <div class="sticker s4">
+        <img src="imagenes/becky.jpg" alt="Becky"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">🌷<small>Becky</small></div>
+    </div>
+
+    <div class="sticker s5">
+        <img src="imagenes/lena.jpg" alt="Lena"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">🦋<small>Lena</small></div>
+    </div>
+
+    <div class="sticker s6">
+        <img src="imagenes/miu.jpg" alt="Miu"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">💜<small>Miu</small></div>
+    </div>
+
+    <div class="sticker s7">
+        <img src="imagenes/gato2.jpg" alt="Gatito tierno"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">😻<small>Otro gatito</small></div>
+    </div>
+
+    <div class="final">
+        Un pequeño rincón de cosas bonitas, sonrisas y mucho cariño. 🐱🌷
+        <br>
+        ¡TQM! ✨
+    </div>
+
+</div>
+
+<script>
+
+/* ENTRAR */
+
+function entrar() {
+
+    document.getElementById("inicio").style.display = "none";
+
+    document.getElementById("universo").style.display = "block";
+
+    crearCorazones();
+
+    animarGalaxia();
+}
+
+/* CORAZONES FLOTANTES */
+
+function crearCorazones() {
+
+    const simbolos = ["💙","💜","✨","🐱","🌷","⭐","🦋"];
+
+    for(let i = 0; i < 45; i++) {
+
+        let elemento = document.createElement("div");
+
+        elemento.className = "corazon";
+
+        elemento.innerHTML =
+            simbolos[Math.floor(Math.random() * simbolos.length)];
+
+        elemento.style.left = Math.random() * 100 + "%";
+
+        elemento.style.animationDuration =
+            (6 + Math.random() * 8) + "s";
+
+        elemento.style.animationDelay =
+            Math.random() * 8 + "s";
+
+        document.getElementById("universo")
+            .appendChild(elemento);
+    }
+}
+
+/* GALAXIA GIRATORIA DE PARTÍCULAS */
+
+function animarGalaxia() {
+
+    const canvas = document.getElementById("galaxia");
+
+    const ctx = canvas.getContext("2d");
+
+    let ancho, alto;
+
+    let particulas = [];
+
+    function ajustar() {
+
+        const dpr = window.devicePixelRatio || 1;
+
+        ancho = canvas.clientWidth;
+        alto = canvas.clientHeight;
+
+        canvas.width = ancho * dpr;
+        canvas.height = alto * dpr;
+
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+
+    ajustar();
+
+    window.addEventListener("resize", ajustar);
+
+    for(let i = 0; i < 1100; i++) {
+
+        particulas.push({
+
+            angulo: Math.random() * Math.PI * 2,
+
+            distancia: Math.random() * 190 + 8,
+
+            velocidad: (Math.random() * .006 + .001),
+
+            tamano: Math.random() * 1.7 + .3,
+
+            color: Math.random()
+
+        });
+    }
+
+    function dibujar() {
+
+        ctx.clearRect(0,0,ancho,alto);
+
+        let cx = ancho / 2;
+        let cy = alto / 2;
+
+        particulas.forEach(p => {
+
+            p.angulo += p.velocidad;
+
+            let espiral = p.angulo;
+
+            let radio = p.distancia;
+
+            let x = cx + Math.cos(espiral) * radio;
+
+            let y = cy + Math.sin(espiral) * radio * .48;
+
+            let colores = [
+                "#ffffff",
+                "#e4a6ff",
+                "#ff9ecb",
+                "#8edfff",
+                "#ffd77b"
+            ];
+
+            ctx.beginPath();
+
+            ctx.arc(x,y,p.tamano,0,Math.PI*2);
+
+            ctx.fillStyle =
+                colores[Math.floor(p.color * colores.length)];
+
+            ctx.shadowBlur = 8;
+
+            ctx.shadowColor = ctx.fillStyle;
+
+            ctx.fill();
+
+        });
+
+        requestAnimationFrame(dibujar);
+    }
+
+    dibujar();
+}
+
+</script>
+
+</body>
+</html>
