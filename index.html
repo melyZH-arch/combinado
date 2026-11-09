@@ -197,7 +197,12 @@ button {
 
 .s1 { top: 19%; left: 25%; }
 .s2 { top: 18%; right: 25%; animation-delay: 1s; }
-.s3 { top: 42%; left: 15%; animation-delay: 2s; }
+.s3 {
+    top: 42%;
+    left: 15%;
+    animation-delay: 2s;
+    z-index: 10;
+}
 .s4 { top: 43%; right: 15%; animation-delay: .5s; }
 .s5 { bottom: 20%; left: 28%; animation-delay: 1.5s; }
 .s6 { bottom: 20%; right: 28%; animation-delay: 2s; }
@@ -384,7 +389,7 @@ button {
     <div class="fallback">🕷️<small>Spidey</small></div>
 </div>
 
-    <div class="sticker s3" style="margin-bottom: 40px; padding: 15px;">
+   <div class="sticker s3" style="margin-bottom: 40px; padding: 15px;">
     <img src="imagenes/freen.jpg" alt="Freen"
     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <div class="fallback">💜<small>Freen</small></div>
