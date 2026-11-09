@@ -125,10 +125,10 @@ button {
 
 .palabra {
     position: absolute;
-    color: #e6c7ff;
+    color: #ffe66d;
     font-weight: bold;
     font-size: 14px;
-    text-shadow: 0 0 12px #c28aff;
+    text-shadow: 0 0 8px #000000, 0 0 14px #ffd700;
     animation: flotar 5s ease-in-out infinite alternate;
     z-index: 3;
 }
@@ -268,6 +268,21 @@ button {
     .p3 { left: 2%; }
     .p4 { right: 2%; }
 }
+.sticker {
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.sticker img {
+    margin-bottom: 15px;
+}
+
+.sticker small {
+    color: #ffffff;
+    text-shadow: 0 2px 5px #000000;
+    font-weight: bold;
+}
+
 </style>
 @keyframes subirPalabras {
     0% {
@@ -363,17 +378,17 @@ button {
         <div class="fallback">🐱<small>Gatito</small></div>
     </div>
 
-    <div class="sticker s2">
-        <img src="imagenes/spiderman.png" alt="Spiderman"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="fallback">🕷️<small>Spidey</small></div>
-    </div>
+   <div class="sticker s2" style="margin-bottom: 40px; padding: 15px;">
+    <img src="imagenes/spiderman.png" alt="Spiderman"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="fallback">🕷️<small>Spidey</small></div>
+</div>
 
-    <div class="sticker s3">
-        <img src="imagenes/freen.jpg" alt="Freen"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="fallback">💗<small>Freen</small></div>
-    </div>
+    <div class="sticker s3" style="margin-bottom: 40px; padding: 15px;">
+    <img src="imagenes/freen.jfif" alt="Freen"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="fallback">💜<small>Freen</small></div>
+</div>
 
     <div class="sticker s4">
         <img src="imagenes/becky.jpg" alt="Becky"
